@@ -1,0 +1,35 @@
+## roles/freeipa/tasks/main.yml
+# vim:ft=ansible:
+---
+- name: Install FreeIPA server
+  dnf:
+    name: freeipa-server
+    state: latest
+  notify:
+    - 'Open Firewall LDAP'
+
+- include_tasks: dns.yml
+  when: with_dns
+
+- include_tasks: adtrust.yml
+  when: ad_trust
+
+- name: Create install script
+  template:
+    src: install.sh.j2
+    dest: /root/install.sh
+    mode: 0770
+    owner: root
+    group: root
+  tags: ipascript
+
+- name: Run install script
+  shell: /root/install.sh
+## in KRA: templates, restart httpd, command "pkispawn -s {{KRA template path}} -f /path/to/kra.cfg
+##         restart pki-tomcatd@pki-tomcat.service and go on with:
+## https://www.freeipa.org/page/Howto/IPAv3_Add_a_KRA
+# create a command according to variables ... that's some heavy stuff...!
+- include_tasks: kra.yml
+  when: SETUP_KRA
+
+...

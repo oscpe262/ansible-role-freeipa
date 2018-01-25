@@ -1,0 +1,10 @@
+## roles/freeipa/tasks/dns.yml
+---
+- name: Install FreeIPA integrated DNS
+  dnf:
+    name: freeipa-server-dns
+    state: latest
+  when: with_dns
+  notify:
+    - Open Firewall DNS
+...

@@ -1,0 +1,109 @@
+## roles/freeipa/defaults/main.yml
+# vim:ft=ansible:
+---
+ad_trust: true
+with_dns: true
+
+# Basic Options for FreeIPA Server
+REALM_NAME: ""
+realm_name: ""
+DOMAIN_NAME: "{{ realm_name }}"
+DM_PASSWORD: ""
+ADMIN_PASSWORD: ""
+MAKEHOMEDIR: true
+HOST_NAME: '{{ ansible_fqdn }}'
+IP_ADDRESS: '{{ ansible_default_ipv4["address"] }}'
+NO_NTP: false
+IDSTART: 2000
+IDMAX: 50000
+NO_HBAC_ALLOW: false 
+              #no allow_all
+IGNORE_TOPOLOGY_DISCONNECT: false
+IGNORE_LAST_OF_ROLE: false
+NO_UI_REDIRECT: false
+SSH_TRUST_DNS: false
+NO_SSH: false
+NO_SSHD: false
+UNATTENDED: true
+# DIRSRV_CONFIG_FILE: Pass this variable manually if used
+
+# Certificate System Options
+EXTERNAL_CA: false
+EXTERNAL_CA_TYPE: generic
+EXTERNAL_CERT_FILE: ""
+NO_PKINIT: true
+DIRSRV_CERT_FILE: ""
+HTTP_CERT_FILE: ""
+PKINIT_CERT_FILE: ""
+DIRSRV_PIN: ""
+HTTP_PIN: ""
+PKINIT_PIN: ""
+DIRSRV_CERT_NAME: ""
+HTTP_CERT_NAME: ""
+PKINIT_CERT_NAME: ""
+CA_CERT_FILE: ""
+CA_SUBJECT: ""
+SUBJECT_BASE: "O={{ REALM_NAME }}"
+CA_SIGNING_ALGORITHM: SHA256withRSA
+
+# DNS Options
+SETUP_DNS: "{{ with_dns }}"
+NO_FORWARDERS: false
+FORWARDER_IP_ADDRESS: "8.8.8.8"
+AUTO_FORWARDERS: true
+FORWARD_POLICY: only
+REVERSE_ZONE: ""
+NO_REVERSE: false
+AUTO_REVERSE: true
+ZONEMGR: "hostmaster@{{ DOMAIN_NAME }}"
+NO_HOST_DNS: false
+NO_DNS_SSHFP: false
+NO_DNSSEC_VALIDATION: false
+ALLOW_ZONE_OVERLAP: false
+
+# AD Trust Options
+SETUP_ADTRUST: "{{ ad_trust }}"
+#NETBIOS_NAME: #Pass manually if needed
+RID_BASE: ""
+SECONDARY_RID_BASE: ""
+ENABLE_COMPAT: false
+
+# Secret Management Options
+SETUP_KRA: true
+
+# KRA Options
+pki_security_domain_https_port: 443
+pki_security_domain_password: ""
+pki_security_domain_user: admin
+pki_enable_proxy: True
+pki_restart_configured_instance: False
+pki_backup_keys: True
+pki_backup_password: ""
+pki_client_database_dir: /tmp/tmp-ce2oQN
+pki_client_database_password: ""
+pki_client_database_purge: False
+pki_client_pkcs12_password: ""
+pki_admin_name: admin
+pki_admin_uid: admin
+pki_admin_email: root@localhost
+pki_admin_password: ""
+pki_admin_nickname: ipa-ca-agent
+pki_admin_subject_dn: cn=ipa-ca-agent,O={{ REALM_NAME }}
+pki_import_admin_cert: True
+pki_admin_cert_file: /root/.dogtag/pki-tomcat/ca_admin.cert
+pki_client_admin_cert_p12: /root/ca-agent.p12
+pki_ds_ldap_port: 389
+pki_ds_password: ""
+pki_ds_base_dn: o=ipakra
+pki_ds_database: ipakra
+pki_storage_subject_dn: cn=DRM Storage Certificate,o={{ REALM_NAME }}
+pki_transport_subject_dn: cn=DRM Transport Certificate,o={{ REALM_NAME }}
+pki_subsystem_subject_dn: cn=DRM Subsystem,O={{ REALM_NAME }}
+pki_ssl_server_subject_dn: cn=ipa.{{ realm_name }},O={{ REALM_NAME }}
+pki_audit_signing_subject_dn: cn=DRM Audit,O={{ REALM_NAME }}
+pki_subsystem_nickname: subsystemCert cert-pki-kra
+pki_ssl_server_nickname: Server-Cert cert-pki-ca
+pki_audit_signing_nickname: auditSigningCert cert-pki-kra
+pki_storage_nickname: storageCert cert-pki-kra
+pki_transport_nickname: transportCert cert-pki-kra
+...

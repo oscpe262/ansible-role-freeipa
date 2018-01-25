@@ -1,0 +1,4 @@
+## roles/freeipa/vars/main.yml
+# vim:ft=ansible:
+---
+...
