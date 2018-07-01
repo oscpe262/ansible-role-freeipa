@@ -1,5 +1,5 @@
 ## roles/freeipa/defaults/main.yml
-# vim:ft=ansible:
+# vim:ft=yaml.ansible:
 ---
 ad_trust: true
 with_dns: true

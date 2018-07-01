@@ -1,5 +1,5 @@
 ## roles/freeipa/tasks/main.yml
-# vim:ft=ansible:
+# vim:ft=yaml.ansible:
 ---
 - name: Install FreeIPA server
   dnf:

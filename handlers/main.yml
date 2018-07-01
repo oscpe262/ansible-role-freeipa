@@ -1,5 +1,5 @@
 ## roles/freeipa/handlers/main.yml
-# vim:ft=ansible:
+# vim:ft=yaml.ansible:
 ---
 - name: "Open Firewall LDAP"
   firewalld:
