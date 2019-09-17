@@ -1,0 +1,5 @@
+# roles/ansible-role-freeipa/vars/Fedora-25.yml
+# vim:ft=yaml.ansible:
+ipaserver_packages: [ "ipa-server", "libselinux-python" ]
+ipaserver_packages_dns: [ "ipa-server-dns" ]
+ipaserver_packages_adtrust: [ "ipa-server-trust-ad" ]

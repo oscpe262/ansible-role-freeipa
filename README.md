@@ -1,18 +1,23 @@
 # Ansible role 'freeipa'
 
-An Ansible role for setting up a FreeIPA stack in Fedora.
-This role is not up to production standard by any means.
-The default values aren't studied in detail yet, nor all vars tested.
-Any feedback is welcome!
+An Ansible role for setting up a FreeIPA stack.
+
+This role is now an adaptation of [the official collection](https://github.com/freeipa/ansible-freeipa).
+Much of the work is a straight up copy of the original, and I suggest that you use that one instead.
+This one is stripped down to fit my personal needs.
 
 ## Requirements
-Fedora 27 (might work on other releases, but it is the only one (barely) tested, feedback welcome!)
+* RHEL/CentOS 7.4+
+* Fedora 26+
+* Ubuntu
+* Debian 10+ (ipaclient only, no server or replica!)
+
+* /usr/bin/kinit is required on the controller if a one time password (OTP) is used
+* python3-gssapi is required on the controller if a one time password (OTP) is used with keytab to install the client.
 
 ## Role Variables
 | Variable		| Default		| Comments (type) |
 | :---			| :---			| :---		  |
-| `ad_trust` | `True` | Install with Active Directory trust |
-| `with_dns` | `True` | Install with integrated DNS server |
 
 ## Dependencies
 
@@ -27,7 +32,7 @@ Fedora 27 (might work on other releases, but it is the only one (barely) tested,
 
 ## License
 
-BSD
+GPLv3
 
 ## Contributors
 

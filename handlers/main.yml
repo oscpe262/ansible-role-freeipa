@@ -1,31 +1,4 @@
 ## roles/freeipa/handlers/main.yml
 # vim:ft=yaml.ansible:
 ---
-- name: "Open Firewall LDAP"
-  firewalld:
-    service: '{{ item  }}'
-    permanent: true
-    state: 'enabled'
-  with_items:
-    - 'freeipa-ldap'
-    - 'freeipa-ldaps'
-
-- name: "Open Firewall DNS"
-  firewalld:
-    service: 'dns'
-    permanent: true
-    state: 'enabled'
-
-- name: "restart httpd"
-  service:
-    name: httpd
-    state: restarted
-    enabled: yes
-
-- name: "restart pkitomcat"
-  service:
-    name: pki-tomcatd@pki-tomcat
-    state: restarted
-    enabled: yes
-
 ...
